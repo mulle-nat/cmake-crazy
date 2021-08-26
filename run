@@ -1,0 +1,29 @@
+#! /bin/sh
+
+PATH="${PWD}:$PATH"
+unset CC
+
+echo "bar-cc" >&2
+echo >&2 
+
+[ -d build ] && rm -rf build 
+
+(
+   mkdir build && 
+   cd build && 
+   cmake -DCMAKE_C_COMPILER=bar-cc .. 
+) || exit 1
+
+[ -d build ] && rm -rf build 
+
+echo >&2 
+echo >&2 
+echo "foo-cc" >&2
+echo >&2 
+
+(
+   mkdir build && 
+   cd build && 
+   cmake -DCMAKE_C_COMPILER=foo-cc .. 
+) || exit 1
+
